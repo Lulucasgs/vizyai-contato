@@ -375,6 +375,35 @@ dialog#orc::backdrop{background:rgba(28,28,26,.55);backdrop-filter:blur(4px)}
 .motion .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
 .motion .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){.track{animation:none}}
+
+/* celular: sem a abertura de arrastar, o topo já aparece aberto */
+@media(max-width:820px){
+  .motion .panel,.motion .word,.motion .scroll-hint{display:none}
+  .motion .hero{height:auto}
+  .motion .stage{position:relative;height:auto;min-height:100svh}
+  .scene{transform:none}
+}
+/* aviso "toque aqui para abrir" pulsando ao lado do + */
+.toque{flex:none;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font:600 11px/1 var(--body);letter-spacing:.02em;text-transform:lowercase;white-space:nowrap;background:var(--ink);color:var(--lime);animation:toque-pulsa 1.6s ease-in-out infinite}
+.toque::before{content:'toque aqui para abrir'}
+.toque::after{content:'';width:7px;height:7px;border-radius:50%;background:currentColor}
+.tab[open-tab] .toque::before,details[open] .toque::before{content:'toque aqui para fechar'}
+.tab .toque{background:var(--tc);color:var(--c)}
+summary .toque{margin-left:auto}
+summary .q{flex:1 1 0;min-width:0}
+summary{flex-wrap:wrap}
+@keyframes toque-pulsa{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(212,245,66,.75)}50%{transform:scale(1.07);box-shadow:0 0 0 7px rgba(212,245,66,0)}}
+.deck-hint{animation:toque-texto 1.6s ease-in-out infinite}
+@keyframes toque-texto{0%,100%{opacity:1}50%{opacity:.4}}
+@media(max-width:820px){
+  .tab button{flex-wrap:wrap;row-gap:10px}
+  .toque{order:3;font-size:10px;padding:5px 9px}
+  summary .toque{margin-left:0}
+  summary{row-gap:12px}
+  /* quebra de linha: o aviso fica sempre embaixo do nome */
+  .tab button::after,summary::after{content:"";order:2;flex-basis:100%;height:0}
+}
+@media (prefers-reduced-motion: reduce){.toque,.deck-hint{animation:none}}
 </style>
 </head>
 <body>
@@ -487,35 +516,35 @@ dialog#orc::backdrop{background:rgba(28,28,26,.55);backdrop-filter:blur(4px)}
     </div>
     <div class="tabs wrap" id="tabs">
       <div class="tab" style="--c:var(--lime);--tc:var(--ink);--x:4%" open-tab>
-        <button aria-expanded="true" aria-controls="s1"><span>social media</span><span class="sym">+</span></button>
+        <button aria-expanded="true" aria-controls="s1"><span>social media</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></button>
         <div class="band" id="s1"><div><div class="inner">
           <div><h3 class="t">posts que param o dedo</h3><p style="margin-top:12px">planejamento de pauta, carrosséis, reels e stories com identidade forte. conteúdo pra atrair gente nova, não só pra cumprir tabela.</p></div>
           <ul><li>calendário mensal</li><li>carrosséis</li><li>reels</li><li>stories</li><li>legendas</li></ul>
         </div></div></div>
       </div>
       <div class="tab" style="--c:var(--olive);--tc:var(--bg);--x:34%">
-        <button aria-expanded="false" aria-controls="s2"><span>tráfego pago</span><span class="sym">+</span></button>
+        <button aria-expanded="false" aria-controls="s2"><span>tráfego pago</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></button>
         <div class="band" id="s2"><div><div class="inner">
           <div><h3 class="t">anúncio que chama no whatsapp</h3><p style="margin-top:12px">campanhas no meta e no google pra quem está procurando o que você faz, com acompanhamento e ajuste constante da verba.</p></div>
           <ul><li>meta ads</li><li>google ads</li><li>criativos</li><li>relatório mensal</li></ul>
         </div></div></div>
       </div>
       <div class="tab" style="--c:var(--ink);--tc:var(--bg);--x:12%">
-        <button aria-expanded="false" aria-controls="s3"><span>sites e landing pages</span><span class="sym">+</span></button>
+        <button aria-expanded="false" aria-controls="s3"><span>sites e landing pages</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></button>
         <div class="band" id="s3"><div><div class="inner">
           <div><h3 class="t">um endereço que vende por você</h3><p style="margin-top:12px">landing pages e sites rápidos, bonitos no celular e pensados pra transformar visita em contato.</p></div>
           <ul><li>landing page</li><li>site institucional</li><li>loja virtual</li><li>copy</li></ul>
         </div></div></div>
       </div>
       <div class="tab" style="--c:var(--tint);--tc:var(--ink);--x:52%">
-        <button aria-expanded="false" aria-controls="s4"><span>vídeos de produto</span><span class="sym">+</span></button>
+        <button aria-expanded="false" aria-controls="s4"><span>vídeos de produto</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></button>
         <div class="band" id="s4"><div><div class="inner">
           <div><h3 class="t">do storyboard à edição</h3><p style="margin-top:12px">roteiro visual de cada produto, animação e edição final. vídeos curtos pra reels, anúncio e página de venda.</p></div>
           <ul><li>storyboard</li><li>animação</li><li>edição</li><li>formatos pra cada rede</li></ul>
         </div></div></div>
       </div>
       <div class="tab" style="--c:var(--bg2);--tc:var(--ink);--x:22%">
-        <button aria-expanded="false" aria-controls="s5"><span>ilustrações e design</span><span class="sym">+</span></button>
+        <button aria-expanded="false" aria-controls="s5"><span>ilustrações e design</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></button>
         <div class="band" id="s5"><div><div class="inner">
           <div><h3 class="t">um visual só seu</h3><p style="margin-top:12px">ilustrações de produto, mascotes e peças avulsas pra quando o seu negócio precisa de uma cara própria.</p></div>
           <ul><li>ilustração de produto</li><li>mascote</li><li>peças avulsas</li></ul>
@@ -568,11 +597,11 @@ dialog#orc::backdrop{background:rgba(28,28,26,.55);backdrop-filter:blur(4px)}
     <div class="wrap grid">
       <div><p class="label">dúvidas</p><h2 class="t rv" style="margin-top:14px">antes de você perguntar</h2></div>
       <div>
-        <details open><summary>preciso aparecer nos vídeos e fotos?<span class="sym">+</span></summary><p class="ans">não. dá pra montar todo o conteúdo com seus produtos, seu espaço, sua equipe ou ilustrações. a gente decide junto o que faz sentido pro seu negócio.</p></details>
-        <details><summary>você usa inteligência artificial?<span class="sym">+</span></summary><p class="ans">uso, como ferramenta de produção. é ela que me deixa entregar mais volume com qualidade. a estratégia, a direção criativa e a revisão final continuam sendo minhas.</p></details>
-        <details><summary>quanto custa?<span class="sym">+</span></summary><p class="ans">depende do que o seu negócio precisa. você responde 6 perguntas rápidas, a mensagem vai direto pro meu whatsapp e eu monto uma proposta sob medida, sem pacote engessado.</p></details>
-        <details><summary>em quanto tempo recebo a proposta?<span class="sym">+</span></summary><p class="ans">em até 2 dias úteis depois que você me manda o orçamento pelo whatsapp.</p></details>
-        <details><summary>atende só profissionais autônomos?<span class="sym">+</span></summary><p class="ans">não. também atendo marcas de produto e e-commerce: moda, joias, beleza, alimentos e qualquer negócio que precise mostrar o produto em movimento.</p></details>
+        <details open><summary><span class="q">preciso aparecer nos vídeos e fotos?</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></summary><p class="ans">não. dá pra montar todo o conteúdo com seus produtos, seu espaço, sua equipe ou ilustrações. a gente decide junto o que faz sentido pro seu negócio.</p></details>
+        <details><summary><span class="q">você usa inteligência artificial?</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></summary><p class="ans">uso, como ferramenta de produção. é ela que me deixa entregar mais volume com qualidade. a estratégia, a direção criativa e a revisão final continuam sendo minhas.</p></details>
+        <details><summary><span class="q">quanto custa?</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></summary><p class="ans">depende do que o seu negócio precisa. você responde 6 perguntas rápidas, a mensagem vai direto pro meu whatsapp e eu monto uma proposta sob medida, sem pacote engessado.</p></details>
+        <details><summary><span class="q">em quanto tempo recebo a proposta?</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></summary><p class="ans">em até 2 dias úteis depois que você me manda o orçamento pelo whatsapp.</p></details>
+        <details><summary><span class="q">atende só profissionais autônomos?</span><span class="toque" aria-hidden="true"></span><span class="sym">+</span></summary><p class="ans">não. também atendo marcas de produto e e-commerce: moda, joias, beleza, alimentos e qualquer negócio que precise mostrar o produto em movimento.</p></details>
       </div>
     </div>
   </section>
