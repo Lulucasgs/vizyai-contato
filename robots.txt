@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /index%20(2).html
+
+Sitemap: https://vizyai-contato.vercel.app/sitemap.xml
